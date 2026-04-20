@@ -1,11 +1,13 @@
 package com.example.midscheduleapp.user.Service;
 
+import jakarta.servlet.http.HttpSession;
 import com.example.midscheduleapp.user.Dto.*;
 import com.example.midscheduleapp.user.Entity.User;
 import com.example.midscheduleapp.user.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ public class UserService {
     // 유저 생성 (즉 회원가입) 기능 추가
     @Transactional
     public CreateUserResponse create(CreateUserRequest request){
-        boolean exist = userRepository.existsByUsername(request.getUsername());
+        boolean exist = userRepository.existsByEmail(request.getEmail());
         if(exist) {
             throw new IllegalStateException("이미 존재하는 유저입니다");
         }
@@ -29,6 +31,20 @@ public class UserService {
         return new CreateUserResponse(
                 user.getUserId(),
                 user.getUsername(),
+                user.getEmail()
+        );
+    }
+
+    @Transactional
+    public LoginResponse login(LoginRequest request){
+        User user = userRepository.findUserByEmail(request.getEmail()).orElseThrow(
+                () -> new IllegalStateException("이메일 또는 비밀번호가 잘못됐습니다.")
+        );
+        if(!user.getPassword().equals(request.getPassword())){
+            throw new IllegalStateException("이메일 또는 비밀번호가 잘못됐습니다.");
+        }
+        return new LoginResponse(
+                user.getUserId(),
                 user.getEmail()
         );
     }
