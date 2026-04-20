@@ -1,6 +1,5 @@
 package com.example.midscheduleapp.user.Service;
 
-import com.example.midscheduleapp.schedule.Dto.CreateScheduleResponse;
 import com.example.midscheduleapp.user.Dto.CreateUserRequest;
 import com.example.midscheduleapp.user.Dto.CreateUserResponse;
 import com.example.midscheduleapp.user.Dto.GetUserResponse;
@@ -44,6 +43,21 @@ public class UserService {
             dtos.add(dto);
         }
         return dtos;
+    }
+
+
+
+    // 유저 단건 조회
+    @Transactional(readOnly = true)
+    public GetUserResponse getUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(
+                () ->new IllegalStateException("해당 유저가 없습니다")
+        );
+        return new GetUserResponse(
+                user.getUserId(),
+                user.getUsername(),
+                user.getEmail()
+        );
     }
 
 
