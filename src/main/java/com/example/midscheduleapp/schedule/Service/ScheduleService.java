@@ -55,4 +55,23 @@ public class ScheduleService {
         }
         return dtos;
     }
+
+
+    // 스케쥴 단건 조회 기능 추가
+    public GetScheduleResponse getOne(Long scheduleId) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
+                ()-> new IllegalStateException("검색된 스케쥴이 없습니다."));
+        return new GetScheduleResponse(
+                schedule.getScheduleId(),
+                schedule.getUserId(),
+                schedule.getTitle(),
+                schedule.getContent()
+        );
+    }
+
+
+
+
+
+
 }
