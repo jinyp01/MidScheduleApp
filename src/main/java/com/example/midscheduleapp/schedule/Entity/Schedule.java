@@ -21,8 +21,7 @@ public class Schedule extends BaseEntity {
     private String title;
     private String content;
 
-    public Schedule(Long scheduleId, Long userId, String title, String content) {
-        this.scheduleId = scheduleId;
+    public Schedule(Long userId, String title, String content) {
         this.userId = userId;
         this.title = title;
         this.content = content;
