@@ -16,23 +16,28 @@ public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
-    @PostMapping("/schedules")
-    ResponseEntity<CreateScheduleResponse> createSchedule(CreateSchesuleRequest request) {
-        CreateScheduleResponse result = scheduleService.save(request);
+    @PostMapping("users/{userId}/schedules")
+    ResponseEntity<CreateScheduleResponse> createSchedule(
+            @PathVariable Long userId,
+            @RequestBody CreateSchesuleRequest request) {
+        CreateScheduleResponse result = scheduleService.save(userId, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    @GetMapping("schedules")
-    ResponseEntity<List<GetScheduleResponse>> getSchedules(){
-        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getAll());
+    @GetMapping("users/{userId}/schedules")
+    ResponseEntity<List<GetScheduleResponse>> getSchedules(
+            @PathVariable Long userId
+    ){
+        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getAll(userId));
     }
 
-    @GetMapping("schedules/{scheduleId}")
-    ResponseEntity<GetScheduleResponse> getSchedule(@PathVariable Long scheduleId) {
+    @GetMapping("users/{userId}/schedules/{scheduleId}")
+    ResponseEntity<GetScheduleResponse> getSchedule(
+            @PathVariable Long scheduleId) {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getOne(scheduleId));
     }
 
-    @PutMapping("schedules/{scheduleId}")
+    @PutMapping("users/{userId}/schedules/{scheduleId}")
     ResponseEntity<UpdateScheduleResponse> updateSchedule(
             @PathVariable Long scheduleId,
             @RequestBody UpdateScheduleRequest request
@@ -40,8 +45,9 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.update(scheduleId, request));
     }
 
-    @DeleteMapping("schedules/{scheduleId}")
-    ResponseEntity<Void>deleteSchedule(@PathVariable Long scheduleId) {
+    @DeleteMapping("users/{userId}/schedules/{scheduleId}")
+    ResponseEntity<Void>deleteSchedule(
+            @PathVariable Long scheduleId) {
         scheduleService.delete(scheduleId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

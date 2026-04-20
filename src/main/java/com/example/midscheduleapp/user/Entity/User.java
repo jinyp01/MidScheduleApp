@@ -1,11 +1,10 @@
 package com.example.midscheduleapp.user.Entity;
 
-import com.example.midscheduleapp.BaseEntity;
+import com.example.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 @Entity
