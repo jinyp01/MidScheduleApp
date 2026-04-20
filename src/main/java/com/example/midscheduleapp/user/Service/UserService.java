@@ -1,8 +1,6 @@
 package com.example.midscheduleapp.user.Service;
 
-import com.example.midscheduleapp.user.Dto.CreateUserRequest;
-import com.example.midscheduleapp.user.Dto.CreateUserResponse;
-import com.example.midscheduleapp.user.Dto.GetUserResponse;
+import com.example.midscheduleapp.user.Dto.*;
 import com.example.midscheduleapp.user.Entity.User;
 import com.example.midscheduleapp.user.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -60,5 +58,18 @@ public class UserService {
         );
     }
 
+    // 유저 업데이트
+    @Transactional
+    public UpdateUserResponse update(Long userId, UpdateUserRequest request){
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new IllegalStateException("해당 유저가 없습니다")
+        );
+        user.update(request.getUsername(), request.getEmail());
+        return new UpdateUserResponse(
+                user.getUserId(),
+                user.getUsername(),
+                user.getEmail()
+        );
+    }
 
 }
