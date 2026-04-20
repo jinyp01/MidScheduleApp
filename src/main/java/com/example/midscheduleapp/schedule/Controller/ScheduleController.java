@@ -1,8 +1,6 @@
 package com.example.midscheduleapp.schedule.Controller;
 
-import com.example.midscheduleapp.schedule.Dto.CreateScheduleResponse;
-import com.example.midscheduleapp.schedule.Dto.CreateSchesuleRequest;
-import com.example.midscheduleapp.schedule.Dto.GetScheduleResponse;
+import com.example.midscheduleapp.schedule.Dto.*;
 import com.example.midscheduleapp.schedule.Entity.Schedule;
 import com.example.midscheduleapp.schedule.Service.ScheduleService;
 import lombok.RequiredArgsConstructor;
@@ -33,5 +31,15 @@ public class ScheduleController {
     ResponseEntity<GetScheduleResponse> getSchedule(@PathVariable Long scheduleId) {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getOne(scheduleId));
     }
+
+    @PutMapping("schedules/{scheduleId}")
+    ResponseEntity<UpdateScheduleResponse> updateSchedule(
+            @PathVariable Long scheduleId,
+            @RequestBody UpdateScheduleRequest request
+    ) {
+        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.update(scheduleId, request));
+    }
+
+
 
 }

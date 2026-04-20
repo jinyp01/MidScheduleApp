@@ -1,8 +1,6 @@
 package com.example.midscheduleapp.schedule.Service;
 
-import com.example.midscheduleapp.schedule.Dto.CreateScheduleResponse;
-import com.example.midscheduleapp.schedule.Dto.CreateSchesuleRequest;
-import com.example.midscheduleapp.schedule.Dto.GetScheduleResponse;
+import com.example.midscheduleapp.schedule.Dto.*;
 import com.example.midscheduleapp.schedule.Entity.Schedule;
 import com.example.midscheduleapp.schedule.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +39,7 @@ public class ScheduleService {
 
 
     // 일정 전체 조회 추가
+    @Transactional(readOnly = true)
     public List<GetScheduleResponse> getAll() {
         List<Schedule> schedules = scheduleRepository.findAll();
         List<GetScheduleResponse> dtos = new ArrayList<>();
@@ -58,6 +57,7 @@ public class ScheduleService {
 
 
     // 스케쥴 단건 조회 기능 추가
+    @Transactional(readOnly = true)
     public GetScheduleResponse getOne(Long scheduleId) {
         Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
                 ()-> new IllegalStateException("검색된 스케쥴이 없습니다."));
@@ -70,8 +70,18 @@ public class ScheduleService {
     }
 
 
-
-
-
-
+    // 스케쥴 수정 기능 추가
+    @Transactional(readOnly = true)
+    public UpdateScheduleResponse update(Long scheduleId, UpdateScheduleRequest request) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
+                () -> new IllegalStateException("검색된 스케쥴이 없습니다.")
+        );
+        schedule.updateSchedule(request.getTitle(), request.getContent());
+        return new UpdateScheduleResponse(
+                schedule.getScheduleId(),
+                schedule.getUserId(),
+                schedule.getTitle(),
+                schedule.getContent()
+        );
+    }
 }
