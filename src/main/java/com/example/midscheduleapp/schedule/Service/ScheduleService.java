@@ -84,4 +84,16 @@ public class ScheduleService {
                 schedule.getContent()
         );
     }
+
+
+    // 스케쥴 삭제 기능 추가
+    @Transactional
+    public void delete(Long scheduleId) {
+        boolean existence = scheduleRepository.existsById(scheduleId);
+        if(!existence) {
+            throw new IllegalStateException("검색된 스케쥴이 없습니다.");
+        }
+        scheduleRepository.deleteById(scheduleId);
+
+    }
 }
