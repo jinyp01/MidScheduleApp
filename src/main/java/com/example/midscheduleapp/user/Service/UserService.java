@@ -16,9 +16,15 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    // 유저 생성 (즉 회원가입) 기능 추가
     @Transactional
     public CreateUserResponse create(CreateUserRequest request){
-        User newUser = new User(request.getUsername(), request.getEmail());
+        boolean exist = userRepository.existsByUsername(request.getUsername());
+        if(exist) {
+            throw new IllegalStateException("이미 존재하는 유저입니다");
+        }
+
+        User newUser = new User(request.getUsername(), request.getPassword(), request.getEmail());
         User user  = userRepository.save(newUser);
         return new CreateUserResponse(
                 user.getUserId(),
