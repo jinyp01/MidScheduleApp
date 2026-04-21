@@ -1,5 +1,6 @@
 package com.example.midscheduleapp.user.Service;
 
+import com.example.midscheduleapp.config.PasswordEncoder;
 import com.example.midscheduleapp.user.Dto.*;
 import com.example.midscheduleapp.user.Entity.User;
 import com.example.midscheduleapp.user.Repository.UserRepository;
@@ -15,6 +16,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // 유저 생성 (즉 회원가입) 기능 추가
     @Transactional
@@ -24,7 +26,13 @@ public class UserService {
             throw new IllegalStateException("이미 존재하는 유저입니다");
         }
 
-        User newUser = new User(request.getUsername(), request.getPassword(), request.getEmail());
+
+        User newUser = new User(
+                request.getUsername(),
+                passwordEncoder.encode(request.getPassword()),
+                request.getEmail()
+        );
+
         User user  = userRepository.save(newUser);
         return new CreateUserResponse(
                 user.getUserId(),
@@ -40,7 +48,7 @@ public class UserService {
         User user = userRepository.findUserByEmail(request.getEmail()).orElseThrow(
                 () -> new IllegalStateException("이메일 또는 비밀번호가 잘못됐습니다.")
         );
-        if(!user.getPassword().equals(request.getPassword())){
+        if(!passwordEncoder.matches(request.getPassword(), user.getPassword())){
             throw new IllegalStateException("이메일 또는 비밀번호가 잘못됐습니다.");
         }
         return new LoginResponse(
