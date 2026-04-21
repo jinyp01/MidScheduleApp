@@ -18,8 +18,6 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String username;
-
-    
     private String password;
     private String email;
 
@@ -29,8 +27,7 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-    public void update(String username, String email){
+    public void update(String username){
         this.username = username;
-        this.email = email;
     }
 }

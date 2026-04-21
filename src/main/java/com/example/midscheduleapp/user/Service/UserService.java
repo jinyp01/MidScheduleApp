@@ -60,7 +60,9 @@ public class UserService {
             GetUserResponse dto = new GetUserResponse(
                     user.getUserId(),
                     user.getUsername(),
-                    user.getEmail()
+                    user.getEmail(),
+                    user.getCreated_at(),
+                    user.getUpdated_at()
             );
             dtos.add(dto);
         }
@@ -78,7 +80,9 @@ public class UserService {
         return new GetUserResponse(
                 user.getUserId(),
                 user.getUsername(),
-                user.getEmail()
+                user.getEmail(),
+                user.getCreated_at(),
+                user.getUpdated_at()
         );
     }
 
@@ -88,11 +92,13 @@ public class UserService {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new IllegalStateException("해당 유저가 없습니다")
         );
-        user.update(request.getUsername(), request.getEmail());
+        user.update(request.getUsername());
         return new UpdateUserResponse(
                 user.getUserId(),
                 user.getUsername(),
-                user.getEmail()
+                user.getEmail(),
+                user.getCreated_at(),
+                user.getUpdated_at()
         );
     }
 
