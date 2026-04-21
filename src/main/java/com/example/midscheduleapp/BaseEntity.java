@@ -1,4 +1,4 @@
-package com.example;
+package com.example.midscheduleapp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
@@ -14,10 +14,12 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
+
     @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime created_at;
 
     @LastModifiedDate
-    private LocalDateTime updatedAt;
+    @Column(name = "updated_at")
+    private LocalDateTime updated_at;
 }

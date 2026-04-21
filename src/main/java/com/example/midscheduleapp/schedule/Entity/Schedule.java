@@ -1,17 +1,19 @@
 package com.example.midscheduleapp.schedule.Entity;
 
 
-import com.example.BaseEntity;
+import com.example.midscheduleapp.BaseEntity;
 import com.example.midscheduleapp.user.Entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Entity
 @Table(name = "schedules")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 public class Schedule extends BaseEntity {
 
     @Id

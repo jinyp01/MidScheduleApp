@@ -26,7 +26,9 @@ public class UserController {
     ResponseEntity<LoginResponse> loginUser(
             @RequestBody LoginRequest request,
             HttpSession session){
-        session.setAttribute("loginUser", userService.login(request));
+        session.setAttribute("loginUser", new SessionUser(
+                userService.login(request).getId(),
+                userService.login(request).getEmail()));
         return ResponseEntity.status(HttpStatus.OK).body(userService.login(request));
     }
 

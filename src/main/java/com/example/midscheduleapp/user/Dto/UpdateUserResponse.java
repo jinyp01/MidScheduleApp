@@ -1,6 +1,6 @@
 package com.example.midscheduleapp.user.Dto;
 
-import com.example.BaseEntity;
+import com.example.midscheduleapp.BaseEntity;
 import lombok.Getter;
 
 @Getter

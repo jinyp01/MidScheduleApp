@@ -31,7 +31,9 @@ public class UserService {
         return new CreateUserResponse(
                 user.getUserId(),
                 user.getUsername(),
-                user.getEmail()
+                user.getEmail(),
+                user.getCreated_at(),
+                user.getUpdated_at()
         );
     }
 
