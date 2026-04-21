@@ -30,6 +30,15 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.login(request));
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(@SessionAttribute(name = "loginUser", required = false) SessionUser sessionUser, HttpSession session) {
+        if (sessionUser == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        session.invalidate();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 
     @GetMapping("/users")
     ResponseEntity<List<GetUserResponse>> getUsers() {
@@ -48,7 +57,6 @@ public class UserController {
             ) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.update(userId, request));
     }
-
 
     @DeleteMapping("/users/{userId}")
     ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
