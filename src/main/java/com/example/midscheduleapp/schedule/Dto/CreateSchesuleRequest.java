@@ -1,11 +1,9 @@
 package com.example.midscheduleapp.schedule.Dto;
 
-
-import com.example.midscheduleapp.BaseEntity;
 import lombok.Getter;
 
 @Getter
-public class CreateSchesuleRequest extends BaseEntity {
+public class CreateSchesuleRequest {
 
     private String title;
     private String content;

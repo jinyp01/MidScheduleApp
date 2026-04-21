@@ -65,7 +65,4 @@ public class UserController {
         userService.delete(userId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
-
-
 }

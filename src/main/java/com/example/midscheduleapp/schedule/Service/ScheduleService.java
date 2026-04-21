@@ -37,7 +37,9 @@ public class ScheduleService {
         return  new CreateScheduleResponse(
                 saveSchedule.getScheduleId(),
                 saveSchedule.getTitle(),
-                saveSchedule.getContent()
+                saveSchedule.getContent(),
+                saveSchedule.getCreatedAt(),
+                saveSchedule.getUpdatedAt()
         );
     }
 
@@ -55,7 +57,9 @@ public class ScheduleService {
             GetScheduleResponse dto = new GetScheduleResponse(
                     schedule.getScheduleId(),
                     schedule.getTitle(),
-                    schedule.getContent()
+                    schedule.getContent(),
+                    schedule.getCreatedAt(),
+                    schedule.getUpdatedAt()
             );
             dtos.add(dto);
         }
@@ -72,7 +76,9 @@ public class ScheduleService {
         return new GetScheduleResponse(
                 schedule.getScheduleId(),
                 schedule.getTitle(),
-                schedule.getContent()
+                schedule.getContent(),
+                schedule.getCreatedAt(),
+                schedule.getUpdatedAt()
         );
     }
 
@@ -88,7 +94,9 @@ public class ScheduleService {
         return new UpdateScheduleResponse(
                 schedule.getScheduleId(),
                 schedule.getTitle(),
-                schedule.getContent()
+                schedule.getContent(),
+                schedule.getCreatedAt(),
+                schedule.getUpdatedAt()
         );
     }
 

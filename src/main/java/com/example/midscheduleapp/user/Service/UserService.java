@@ -1,13 +1,11 @@
 package com.example.midscheduleapp.user.Service;
 
-import jakarta.servlet.http.HttpSession;
 import com.example.midscheduleapp.user.Dto.*;
 import com.example.midscheduleapp.user.Entity.User;
 import com.example.midscheduleapp.user.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +30,8 @@ public class UserService {
                 user.getUserId(),
                 user.getUsername(),
                 user.getEmail(),
-                user.getCreated_at(),
-                user.getUpdated_at()
+                user.getCreatedAt(),
+                user.getUpdatedAt()
         );
     }
 
@@ -61,8 +59,8 @@ public class UserService {
                     user.getUserId(),
                     user.getUsername(),
                     user.getEmail(),
-                    user.getCreated_at(),
-                    user.getUpdated_at()
+                    user.getCreatedAt(),
+                    user.getUpdatedAt()
             );
             dtos.add(dto);
         }
@@ -81,8 +79,8 @@ public class UserService {
                 user.getUserId(),
                 user.getUsername(),
                 user.getEmail(),
-                user.getCreated_at(),
-                user.getUpdated_at()
+                user.getCreatedAt(),
+                user.getUpdatedAt()
         );
     }
 
@@ -97,8 +95,8 @@ public class UserService {
                 user.getUserId(),
                 user.getUsername(),
                 user.getEmail(),
-                user.getCreated_at(),
-                user.getUpdated_at()
+                user.getCreatedAt(),
+                user.getUpdatedAt()
         );
     }
 
