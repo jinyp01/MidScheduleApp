@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class ScheduleController {
     // 일정 생성
     @PostMapping("/users/{userId}/schedules")
     ResponseEntity<CreateScheduleResponse> createSchedule(
+            @Validated
             @PathVariable Long userId,
             @RequestBody CreateSchesuleRequest request) {
         CreateScheduleResponse result = scheduleService.save(userId, request);
@@ -53,6 +55,7 @@ public class ScheduleController {
     // 일정 업데이트
     @PutMapping("/users/{userId}/schedules/{scheduleId}")
     ResponseEntity<UpdateScheduleResponse> updateSchedule(
+            @Validated
             @PathVariable Long scheduleId,
             @RequestBody UpdateScheduleRequest request
     ) {
