@@ -5,6 +5,10 @@ import com.example.midscheduleapp.user.Dto.*;
 import com.example.midscheduleapp.user.Entity.User;
 import com.example.midscheduleapp.user.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -75,7 +79,11 @@ public class UserService {
         return dtos;
     }
 
-
+//    @Transactional(readOnly = true)
+//    public Page<User> getPageUsers(int page, int size) {
+//        Pageable pageable = PageRequest.of(page, size, Sort.by("updatedAt").descending());
+//        return userRepository.findAll(pageable);
+//    }
 
     // 유저 단건 조회
     @Transactional(readOnly = true)

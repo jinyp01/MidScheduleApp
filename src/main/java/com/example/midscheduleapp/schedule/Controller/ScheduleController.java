@@ -4,6 +4,7 @@ import com.example.midscheduleapp.schedule.Dto.*;
 import com.example.midscheduleapp.schedule.Entity.Schedule;
 import com.example.midscheduleapp.schedule.Service.ScheduleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,14 @@ public class ScheduleController {
             @PathVariable Long userId
     ){
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getAll(userId));
+    }
+
+    @GetMapping("/schedules/page")
+    ResponseEntity<Page<Schedule>> getPageSchedules(
+            @RequestParam(defaultValue = "0")int page,
+            @RequestParam(defaultValue = "10")int size
+    ){
+        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getPageAll(page, size));
     }
 
     @GetMapping("/users/{userId}/schedules/{scheduleId}")

@@ -1,9 +1,11 @@
 package com.example.midscheduleapp.user.Controller;
 
 import com.example.midscheduleapp.user.Dto.*;
+import com.example.midscheduleapp.user.Entity.User;
 import com.example.midscheduleapp.user.Service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +48,15 @@ public class UserController {
     ResponseEntity<List<GetUserResponse>> getUsers() {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUsers());
     }
+
+//    @GetMapping("/users/page")
+//    ResponseEntity<Page<User>> getPageUsers(
+//            @RequestParam(defaultValue = "0")int page,
+//            @RequestParam(defaultValue = "10")int size) {
+//        return ResponseEntity.status(HttpStatus.OK).body(userService.getPageUsers(page,size));
+//    }
+
+
 
     @GetMapping("/users/{userId}")
     ResponseEntity<GetUserResponse> getUser(@PathVariable Long userId) {

@@ -6,6 +6,10 @@ import com.example.midscheduleapp.schedule.repository.ScheduleRepository;
 import com.example.midscheduleapp.user.Entity.User;
 import com.example.midscheduleapp.user.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -64,6 +68,12 @@ public class ScheduleService {
             dtos.add(dto);
         }
         return dtos;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Schedule> getPageAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("updatedAt").descending());
+        return scheduleRepository.findAll(pageable);
     }
 
 

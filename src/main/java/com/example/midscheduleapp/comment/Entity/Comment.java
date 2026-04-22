@@ -23,11 +23,11 @@ public class Comment extends BaseEntity {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "scheduleId", nullable = false)
+    @JoinColumn(name = "schedule_id", nullable = false)
     private Schedule schedule;
 
     public Comment(String content, User user, Schedule schedule) {

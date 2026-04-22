@@ -55,7 +55,8 @@ public class CommentService {
         List<GetCommentResponse> dtos =
                 commentRepository.findBySchedule(schedule)
                         .stream()
-                        .map(comment -> new GetCommentResponse(
+                        .map(comment ->
+                                new GetCommentResponse(
                                 comment.getId(),
                                 comment.getContent(),
                                 comment.getCreatedAt(),
