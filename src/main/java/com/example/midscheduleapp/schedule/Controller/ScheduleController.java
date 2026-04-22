@@ -33,7 +33,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/schedules/page")
-    ResponseEntity<Page<Schedule>> getPageSchedules(
+    ResponseEntity<PageScheduleResponse<GetScheduleResponse>> getPageSchedules(
             @RequestParam(defaultValue = "0")int page,
             @RequestParam(defaultValue = "10")int size
     ){

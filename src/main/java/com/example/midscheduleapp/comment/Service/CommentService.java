@@ -34,7 +34,7 @@ public class CommentService {
                 () -> new IllegalStateException("해당하는 일정이 없습니다.")
         );
 
-        Comment comment = new Comment( request.getComtent(), user, schedule );
+        Comment comment = commentRepository.save(new Comment( request.getContent(), user, schedule ));
 
         return new CreateCommentResponse(
                 comment.getId(),

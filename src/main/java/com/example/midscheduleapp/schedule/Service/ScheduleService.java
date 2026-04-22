@@ -70,10 +70,20 @@ public class ScheduleService {
         return dtos;
     }
 
+    // 페이징 해서 일정 전체 조회
     @Transactional(readOnly = true)
-    public Page<Schedule> getPageAll(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("updatedAt").descending());
-        return scheduleRepository.findAll(pageable);
+    public PageScheduleResponse<GetScheduleResponse> getPageAll(int page, int size) {
+        Page<Schedule> schedules = scheduleRepository.findAll(PageRequest.of(page, size));
+
+        Page<GetScheduleResponse> dtos = schedules.map(schedule -> new GetScheduleResponse(
+                schedule.getScheduleId(),
+                schedule.getTitle(),
+                schedule.getContent(),
+                schedule.getCreatedAt(),
+                schedule.getUpdatedAt()
+        ));
+
+        return new PageScheduleResponse<>(dtos);
     }
 
 
