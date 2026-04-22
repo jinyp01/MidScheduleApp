@@ -17,6 +17,7 @@ public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
+    // 일정 생성
     @PostMapping("/users/{userId}/schedules")
     ResponseEntity<CreateScheduleResponse> createSchedule(
             @PathVariable Long userId,
@@ -25,6 +26,7 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
+    // 일정 전체 조회
     @GetMapping("/users/{userId}/schedules")
     ResponseEntity<List<GetScheduleResponse>> getSchedules(
             @PathVariable Long userId
@@ -32,6 +34,7 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getAll(userId));
     }
 
+    // (페이징) 일정 전체 조회
     @GetMapping("/schedules/page")
     ResponseEntity<PageScheduleResponse<GetScheduleResponse>> getPageSchedules(
             @RequestParam(defaultValue = "0")int page,
@@ -40,12 +43,14 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getPageAll(page, size));
     }
 
+    // 일정 단건 조회
     @GetMapping("/users/{userId}/schedules/{scheduleId}")
     ResponseEntity<GetScheduleResponse> getSchedule(
             @PathVariable Long scheduleId) {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getOne(scheduleId));
     }
 
+    // 일정 업데이트
     @PutMapping("/users/{userId}/schedules/{scheduleId}")
     ResponseEntity<UpdateScheduleResponse> updateSchedule(
             @PathVariable Long scheduleId,
@@ -54,6 +59,7 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.update(scheduleId, request));
     }
 
+    // 일정 삭제
     @DeleteMapping("/users/{userId}/schedules/{scheduleId}")
     ResponseEntity<Void>deleteSchedule(
             @PathVariable Long scheduleId) {

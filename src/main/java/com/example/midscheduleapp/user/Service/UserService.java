@@ -22,7 +22,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    // 유저 생성 (즉 회원가입) 기능 추가
+    // 유저 생성 -> (회원가입) 기능 추가
     @Transactional
     public CreateUserResponse create(CreateUserRequest request){
         boolean exist = userRepository.existsByEmail(request.getEmail());
@@ -47,6 +47,7 @@ public class UserService {
         );
     }
 
+    // 로그인 과정
     @Transactional
     public LoginResponse login(LoginRequest request){
         User user = userRepository.findUserByEmail(request.getEmail()).orElseThrow(
@@ -100,7 +101,7 @@ public class UserService {
         );
     }
 
-    // 유저 업데이트
+    // 유저 정보 업데이트
     @Transactional
     public UpdateUserResponse update(Long userId, UpdateUserRequest request){
         User user = userRepository.findById(userId).orElseThrow(

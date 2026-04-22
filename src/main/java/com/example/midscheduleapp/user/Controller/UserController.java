@@ -19,11 +19,13 @@ public class UserController {
 
     private final UserService userService;
 
+    // 회원가입
     @PostMapping("/users")
     ResponseEntity<CreateUserResponse> createUser( @RequestBody CreateUserRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.create(request));
     }
 
+    // 로그인
     @PostMapping("/login")
     ResponseEntity<LoginResponse> loginUser(
             @RequestBody LoginRequest request,
@@ -34,6 +36,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.login(request));
     }
 
+    // 로그아웃
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(@SessionAttribute(name = "loginUser", required = false) SessionUser sessionUser, HttpSession session) {
         if (sessionUser == null) {
@@ -44,6 +47,7 @@ public class UserController {
     }
 
 
+    // 유저 전체 조회
     @GetMapping("/users")
     ResponseEntity<List<GetUserResponse>> getUsers() {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUsers());
@@ -57,12 +61,13 @@ public class UserController {
 //    }
 
 
-
+    // 유저 단건 조회
     @GetMapping("/users/{userId}")
     ResponseEntity<GetUserResponse> getUser(@PathVariable Long userId) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUser(userId));
     }
 
+    // 유저 정보 업데이트
     @PutMapping("/users/{userId}")
     ResponseEntity<UpdateUserResponse> updateUser(
             @PathVariable Long userId,
@@ -71,6 +76,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.update(userId, request));
     }
 
+    // 유저 삭제
     @DeleteMapping("/users/{userId}")
     ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
         userService.delete(userId);
