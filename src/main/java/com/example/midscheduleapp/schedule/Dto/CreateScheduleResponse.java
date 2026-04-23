@@ -4,18 +4,22 @@ package com.example.midscheduleapp.schedule.Dto;
 import com.example.midscheduleapp.BaseEntity;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
-public class CreateScheduleResponse extends BaseEntity {
+public class CreateScheduleResponse {
 
     private final Long scheduleId;
-    private final Long userId;
     private final String title;
     private final String content;
+    private final LocalDateTime created_at;
+    private final LocalDateTime updqted_at;
 
-    public CreateScheduleResponse(Long scheduleId, Long userId, String title, String content) {
+    public CreateScheduleResponse(Long scheduleId, String title, String content, LocalDateTime createdAt, LocalDateTime updqtedAt) {
         this.scheduleId = scheduleId;
-        this.userId = userId;
         this.title = title;
         this.content = content;
+        this.created_at = createdAt;
+        this.updqted_at = updqtedAt;
     }
 }
